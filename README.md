@@ -4,6 +4,7 @@ OF Course 2021
  
 # Creative coding with openFrameworks
 
+
 to download the examples
 
 1. download and launch github desktop and sign in
@@ -12,6 +13,8 @@ to download the examples
 4. copy paste the address of this URL in repository URL "https://github.com/paul-ferragut/OF2021/"
 5. Local path choose your openFrameworks App directory (eg: "Macintosh HD/users/paul/coding/of_v0.11.0_osx_release/apps/OF2021" )
 6. clone
+
+Alternatively you can manually download the examples by clicking on 'code' and 'download zip'
 
 
 to run one example
