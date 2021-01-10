@@ -39,4 +39,6 @@ public:
 
 	bool scene1;
 	bool scene2;
+
+	float maxVolume;
 };

@@ -23,8 +23,15 @@ void ofApp::setup() {
 	ofSoundStreamSettings settings;
 
 	// if you want to set the device id to be different than the default
-	// auto devices = soundStream.getDeviceList();
-	// settings.device = devices[4];
+	auto devices = soundStream.getDeviceList();
+	for (int i = 0; i < devices.size(); i++) {
+		std::cout << "devices[" << ofToString(i) << "] = " << ofToString(devices[i]) << std::endl;
+	}
+
+	int deviceNum = 5;//set your microphone device number here
+
+	settings.setInDevice(devices[deviceNum]);
+
 
 	// you can also get devices for an specific api
 	// auto devices = soundStream.getDevicesByApi(ofSoundDevice::Api::PULSE);
@@ -34,10 +41,10 @@ void ofApp::setup() {
 	// settings.api = ofSoundDevice::Api::PULSE;
 
 	// or by name
-	auto devices = soundStream.getMatchingDevices("default");//from the audioInputExample
-	if (!devices.empty()) {//from the audioInputExample
-		settings.setInDevice(devices[0]);//from the audioInputExample
-	}//from the audioInputExample
+	//auto devices = soundStream.getMatchingDevices("default");//from the audioInputExample
+	//if (!devices.empty()) {//from the audioInputExample
+	//	settings.setInDevice(devices[0]);//from the audioInputExample
+	//}//from the audioInputExample
 
 	settings.setInListener(this);//from the audioInputExample
 	settings.sampleRate = 44100;//from the audioInputExample
@@ -46,15 +53,25 @@ void ofApp::setup() {
 	settings.bufferSize = bufferSize;//from the audioInputExample
 	soundStream.setup(settings);//from the audioInputExample
 
+
+
 	scene1 = true;
 	scene2 = false;
 
+
+	maxVolume = 0.0;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 
-	float microphoneSensitivity = 0.10;//Make this value slightly bigger or smaller depending on your mic sensitivity
+
+	if (smoothedVol > maxVolume) {
+		maxVolume = smoothedVol;
+	}
+	float microphoneSensitivity = maxVolume ;
+	// The volume sensitivity will remap itself with your microphone maximum heard volume
+	
 	//lets scale the vol up to a 0-1 range 
 	scaledVol = ofMap(smoothedVol, 0.0, microphoneSensitivity, 0.0, 1.0, true);
 	//cout<<"microphone volume; scaledVol:"<<scaledVol<<endl; //uncomment this line if you want to debug your microphone in the console
