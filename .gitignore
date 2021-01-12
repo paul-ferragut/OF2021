@@ -55,3 +55,15 @@ week2/rectangleButton/obj/Win32/Debug/rectangleButton.tlog/rectangleButton.write
 *.lastbuildstate
 *.exp
 week2/rectangleButton/obj/Win32/Debug/vc141.pdb
+extra/snowflakes/.vs/snowflakes/v15/.suo
+extra/snowflakes/.vs/snowflakes/v15/Browse.VC.opendb
+extra/snowflakes/.vs/snowflakes/v15/Solution.VC.db-shm
+*.db-wal
+extra/snowflakes/bin/data/.gitkeep
+*.opendb
+*.db-shm
+*.make
+week3/worldMap/.vs/worldMap/v15/.suo
+week3/VJTestGui/.vs/VJTest/v15/.suo
+*.make
+week2/VJTest/addons.make
