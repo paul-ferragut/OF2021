@@ -67,3 +67,7 @@ week3/worldMap/.vs/worldMap/v15/.suo
 week3/VJTestGui/.vs/VJTest/v15/.suo
 *.make
 week2/VJTest/addons.make
+week4/particleTest/bin/data/.gitkeep
+week3/VJTestGui/.vs/VJTestGui/v15/.suo
+week5/vectorField_wParticles_from_ofZach/bin/data/.gitkeep
+week5/motion/bin/data/.gitkeep
