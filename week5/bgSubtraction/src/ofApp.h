@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "particle.h"
-
+#include "ofxOpenCv.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,7 +22,18 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-
-		vector<particle>p;
 		
+		ofVideoGrabber vidGrabber;
+		
+		ofxCvColorImage colorImg;
+		ofxCvGrayscaleImage grayImg;
+		ofxCvGrayscaleImage grayBg;
+		ofxCvGrayscaleImage grayDiff;
+
+		ofxCvContourFinder contourFinder;
+
+		ofxPanel gui;
+		ofxIntSlider threshold;
+		ofxToggle bLearnBackground;
+
 };

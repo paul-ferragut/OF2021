@@ -3,45 +3,68 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	//ofSetBackgroundAuto(false);
-	ofBackground(0);
-	for (int i = 0; i < 100; i++) {
-		particle temporaryP;
-		p.push_back(temporaryP);
-	}
+	vidGrabber.setup(320,240);
 
-	for (int i = 0; i < p.size(); i++) {
-		p[i].setup();
-	}
-	ofEnableAlphaBlending();
+	colorImg.allocate(320,240);
+	grayImg.allocate(320, 240);
+	grayBg.allocate(320, 240);
+	grayDiff.allocate(320, 240);
+
+	gui.setup();
+	gui.add(bLearnBackground.setup("capture bg",false));
+	gui.add(threshold.setup("threshold", 60, 0, 255));
+
+	ofBackground(0);
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	ofSetWindowTitle("Framerate:"+ofToString(ofGetFrameRate()));
-	ofSetFrameRate(60);
+	vidGrabber.update();
+	bool bNewFrame = false;
+	bNewFrame=vidGrabber.isFrameNew(); //30 images per second, 200 frames seconds
+	if (bNewFrame==true) {
+	
+		colorImg.setFromPixels(vidGrabber.getPixels());
 
-	for (int i = 0; i < p.size(); i++) {
-		p[i].update();
+		grayImg = colorImg;
+
+		if (bLearnBackground==true) {
+			grayBg = grayImg;
+			bLearnBackground = false;
+		}
+
+		grayDiff.absDiff(grayBg, grayImg);
+		grayDiff.threshold(threshold);
+
+		contourFinder.findContours(grayDiff, 300, (320 * 240) / 2, 10, false);
+		
+
+		for (int i = 0; i < contourFinder.nBlobs; i++) {
+			cout << "blob nb:" << i << " center x:" << contourFinder.blobs[i].boundingRect.getCenter().x << " center y:" << contourFinder.blobs[i].boundingRect.getCenter().y << endl;
+		
+		}
+
 	}
+
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	
-	ofSetColor(255,255);
-
-	for (int i = 0; i < p.size(); i++) {
-		p[i].draw(3);
-		p[i].drawTrail();
-	}
+	colorImg.draw(20, 20);
+	grayImg.draw(360, 20);
+	grayBg.draw(20, 280);
+	grayDiff.draw(360, 280);
+	grayDiff.draw(360, 540);
+	contourFinder.draw(360, 540);
+	gui.draw();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	
+
 }
 
 //--------------------------------------------------------------

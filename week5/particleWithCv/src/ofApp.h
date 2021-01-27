@@ -2,6 +2,9 @@
 
 #include "ofMain.h"
 #include "particle.h"
+#include "ofxGui.h"
+#include "ofxOpenCv.h"
+
 
 
 class ofApp : public ofBaseApp{
@@ -24,5 +27,34 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		vector<particle>p;
+
+		ofxPanel gui;
+
+		ofxToggle useNoise;
+		ofxFloatSlider noiseAmount;
+		ofxIntSlider pNum;
+
+		vector<ofVec3f>attractionPoints;
+
+		ofVideoGrabber 		vidGrabber;
+
+		ofxIntSlider threshold;
+		ofxToggle	bLearnBakground;
+		ofxIntSlider minBlob;
+		ofxIntSlider maxBlob;
+		ofxToggle useHole;
+
+		ofxToggle debugDraw;
+
+		ofxCvColorImage			colorImg;
+
+		ofxCvGrayscaleImage 	grayImage;
+		ofxCvGrayscaleImage 	grayBg;
+		ofxCvGrayscaleImage 	grayDiff;
+
+		ofxCvContourFinder 	contourFinder;
+
+		
+		
 		
 };

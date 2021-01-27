@@ -46,10 +46,32 @@ void particle::update() {
 			vel.y *= -1.0;
 			
 		}
+
+
+		trail.push_back(pos);
+
+		if (trail.size() >20) {
+			trail.erase(trail.begin());
+		}
 }
 
 //-----------------------------------------------------------------------------------------------------------------
 void particle::draw(float radius) {
-
+	ofFill();
 	ofDrawCircle(pos, radius);
+
+}
+
+void particle::drawTrail() {
+
+	ofNoFill();
+	ofBeginShape();
+
+	for (int i = 0; i < trail.size(); i++) {
+	
+		ofVertex(trail[i]);
+	}
+
+	ofEndShape();
+
 }
